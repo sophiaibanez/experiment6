@@ -1,0 +1,82 @@
+def isWordGuessed(secretWord,lettersGuessed):
+    
+    i = 0
+    for x in secretWord:
+        for y in lettersGuessed:
+            if lettersGuessed[i] == secretWord[i]:
+                i =+ 1
+                break
+    return lettersGuessed[i] in secretWord
+
+
+def getGuessedWord(secretWord,lettersGuessed):
+    
+    i = 0
+    string = ''
+    for x in secretWord:
+        for y in lettersGuessed:
+            if secretWord[i] in lettersGuessed:
+                string += x
+                i += 1
+            else:
+                string += ' _ '
+                i += 1
+            break
+    return string
+
+
+def getAvailableLetters(lettersGuessed):
+    
+    import string
+    letters = list(string.ascii_lowercase)
+    store = ''
+    
+    
+    for x in letters:
+        if x in lettersGuessed:
+            letters.remove(x)
+        else:
+            store += x
+    return store
+
+
+def Hangaroo(secretWord):
+    
+    print('Welcome to Hangaroo!')
+    print('Guess the word. You have 4 lives!')
+    
+    lettersGuessed = []
+    list(lettersGuessed)
+    mistakesMade = 0
+       
+    print (' ')
+    
+    while True:
+        print('Lives: ', 4-mistakesMade)
+        print('Available letters: ', getAvailableLetters(lettersGuessed))
+        
+        guess = input('Guess a letter: ')
+        lowercaseGuess = guess.lower()
+        
+        if lowercaseGuess in secretWord:
+            lettersGuessed += guess
+            print('Correct!')
+            print(getGuessedWord(secretWord, lettersGuessed))
+       
+        elif lowercaseGuess in lettersGuessed:
+            print("Letter used. Try another letter: ")
+            print(getGuessedWord(secretWord, lettersGuessed))
+        
+        else:
+            lettersGuessed += guess
+            print("Wrong. Letter not in the word: ", getGuessedWord(secretWord, lettersGuessed))
+            mistakesMade += 1
+            
+     
+    if isWordGuessed(secretWord, lettersGuessed):
+        print("Congratulations! You guessed the word right!")
+        break
+       
+    if mistakesMade == 4:
+        print('You ran out of lives. Game over.')
+        break
