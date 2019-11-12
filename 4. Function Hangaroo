@@ -40,7 +40,7 @@ def getAvailableLetters(lettersGuessed):
             store += x
     return store
 
-
+secretWord = ''
 def Hangaroo(secretWord):
     
     print('Welcome to Hangaroo!')
