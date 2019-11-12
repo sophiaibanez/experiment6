@@ -1,0 +1,13 @@
+def getAvailableLetters(lettersGuessed):
+    
+    import string
+    letters = list(string.ascii_lowercase)
+    store = ''
+    
+    
+    for x in letters:
+        if x in lettersGuessed:
+            letters.remove(x)
+        else:
+            store += x
+    return store
