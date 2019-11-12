@@ -1,0 +1,15 @@
+def getGuessedWord(secretWord,lettersGuessed):
+    
+    i = 0
+    string = ''
+    for x in secretWord:
+        for y in lettersGuessed:
+            if secretWord[i] in lettersGuessed:
+                string += x
+                i += 1
+            else:
+                string += ' _ '
+                i += 1
+            break
+    return string
+    
