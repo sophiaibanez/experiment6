@@ -1,12 +1,13 @@
 def isWordGuessed(secretWord,lettersGuessed):
     
-    i = 0
+    ctr = 0
     for x in secretWord:
         for y in lettersGuessed:
-            if lettersGuessed[i] == secretWord[i]:
-                i =+ 1
+            if y == x:
+                ctr += 1
                 break
-    return lettersGuessed[i] in secretWord
+
+    return ctr == len(secretWord) 
 
 
 def getGuessedWord(secretWord,lettersGuessed):
@@ -45,6 +46,10 @@ def Hangaroo(secretWord):
     print('Welcome to Hangaroo!')
     print('Guess the word. You have 4 lives!')
     
+    import random
+    randomWords = ['programming', 'hangaroo', 'skywalker', 'subway', 'jedi']
+    secretWord = random.choice(randomWords)
+    
     lettersGuessed = []
     list(lettersGuessed)
     mistakesMade = 0
@@ -60,6 +65,8 @@ def Hangaroo(secretWord):
         
         if lowercaseGuess in secretWord:
             lettersGuessed += guess
+            lettersGuessed.append(lowercaseGuess)
+            
             print('Correct!')
             print(getGuessedWord(secretWord, lettersGuessed))
        
@@ -69,14 +76,14 @@ def Hangaroo(secretWord):
         
         else:
             lettersGuessed += guess
-            print("Wrong. Letter not in the word: ", getGuessedWord(secretWord, lettersGuessed))
+            print("Wrong. Letter not in the word: ")
+            print(getGuessedWord(secretWord, lettersGuessed))
             mistakesMade += 1
             
-     
-    if isWordGuessed(secretWord, lettersGuessed):
-        print("Congratulations! You guessed the word right!")
-        break
+        if isWordGuessed(secretWord, lettersGuessed):
+            print("Congratulations! You guessed the word right!")
+            break   
        
-    if mistakesMade == 4:
-        print('You ran out of lives. Game over.')
-        break
+        if mistakesMade == 4:
+             print('You ran out of lives. Game over.')
+             break
